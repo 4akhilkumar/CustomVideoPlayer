@@ -106,16 +106,58 @@ window.addEventListener("keyup", (e) => {
 
 });
 
+// check the useragent is mobile or not
+function isMobile() {
+  if (navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/webOS/i) ||
+    navigator.userAgent.match(/iPhone/i) ||
+    navigator.userAgent.match(/iPad/i) ||
+    navigator.userAgent.match(/iPod/i) ||
+    navigator.userAgent.match(/BlackBerry/i) ||
+    navigator.userAgent.match(/Windows Phone/i)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+if(isMobile() === false) {
+  mainVideo.addEventListener("click", () => {
+    const isVideoPaused = video_player.classList.contains("paused");
+    isVideoPaused ? pauseVideo() : playVideo();
+  });
+}
+
+function single_tap() {
+  const isVideoPaused = video_player.classList.contains("paused");
+  isVideoPaused ? pauseVideo() : playVideo();
+}
+
 var screenX;
 function double_tap(e) {
+  let screenWidth = window.innerWidth;
   screenX = e.touches[0].screenX;
-  if (screenX > 0 && screenX < 500) {
+  if (screenX > 0 && screenX < (screenWidth/2)) {
     mainVideo.currentTime -= 5;
   }
-  else if (screenX > 500 && screenX < 1000) {
+  else if (screenX > (screenWidth/2) && screenX < screenWidth) {
     mainVideo.currentTime += 5;
   }
 }
+
+var tapped = false;
+video_player.addEventListener("touchstart", (e) => {
+  if(!tapped) {
+    tapped = setTimeout(function() {
+      // single_tap();
+      tapped = null
+    },300); //wait 300ms
+  } else {
+    clearTimeout(tapped);
+    tapped = null
+    double_tap(e);
+  }
+}, { passive: true });
 
 // Load video duration
 mainVideo.addEventListener("loadeddata", (e) => {
@@ -161,8 +203,14 @@ mainVideo.addEventListener("timeupdate", (e) => {
   
   let videoDuration = e.target.duration;
   // progressBar width change
-  let progressWidth = (currentVideoTime / videoDuration) * 100 + 0.5;
-  progress_Bar.style.width = `${progressWidth}%`;
+  let progressWidth = (currentVideoTime / videoDuration) * 100;
+  progress_Bar.value = progressWidth;
+  progress_Bar.style.background = `linear-gradient(to right, #ff0000 0%, #ff0000 ${progress_Bar.value}%, #f0f0f063 ${progress_Bar.value}%, #f0f0f063 100%)`;
+});
+
+progress_Bar.addEventListener("input", (e) => {
+  let progressBarValue = e.target.value;
+  progress_Bar.style.background = `linear-gradient(to right, #ff0000 0%, #ff0000 ${progressBarValue}%, #f0f0f063 ${progressBarValue}%, #f0f0f063 100%)`;
 });
 
 // let's update playing video current time on according to the progress bar width
@@ -187,8 +235,8 @@ function changeVolume() {
 
 function muteVolume() {
   if (volume_range.value == 0) {
-    volume_range.value = 66;
-    mainVideo.volume = 0.66;
+    volume_range.value = 80;
+    mainVideo.volume = 0.80;
     volume.innerHTML = "volume_up";
   } else {
     volume_range.value = 0;
@@ -404,35 +452,21 @@ function reportWindowSize() {
 window.addEventListener('resize', reportWindowSize);
 
 // mobile touch controls
-var tapped = false;
-video_player.addEventListener("touchstart", (e) => {
-  controls.classList.add("active");
-  setTimeout(() => {
-    controls.classList.remove("active");
-  }, 8000);
+video_player.addEventListener("touchstart", () => {
+    controls.classList.add("active");
+    setTimeout(() => {
+      controls.classList.remove("active");
+    }, 8000);
+  }, { passive: true }
+);
 
-  if(!tapped) {
-    tapped = setTimeout(function() {
-      // console.log("single tap");
-      tapped = null
-    },300); //wait 300ms
-  } else {
-    clearTimeout(tapped);
-    tapped = null
-    double_tap(e);
-  }
-}, { passive: true });
-
-video_player.addEventListener(
-  "touchmove",
-  () => {
+video_player.addEventListener("touchmove", () => {
     if (video_player.classList.contains("paused")) {
       controls.classList.remove("active");
     } else {
       controls.classList.add("active");
     }
-  },
-  { passive: true }
+  }, { passive: true }
 );
 
 //  Video Preview
@@ -458,7 +492,7 @@ preview_video.addEventListener("loadeddata", async function () {
   var duration = parseInt(preview_video.duration);
 
   // if duration is greater than 900 then don't create thumbnails
-  if (duration <= 900) {
+  if (duration <= 900 && isMobile() == false) {
     for (var i = 1; i <= duration; i++) {
       array.push(i);
     }
