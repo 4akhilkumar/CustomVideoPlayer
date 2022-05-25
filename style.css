@@ -38,7 +38,7 @@ video::cue {
   bottom: 82px;
   left: calc(var(--x) + 11px);
   transform: translateX(-50%);
-  width: 165px;
+  width: 162px;
   height: 90px;
   border-radius: 3px;
   display: none;
@@ -48,6 +48,10 @@ video::cue {
   width: 100%;
   height: 100%;
   outline: none;
+}
+
+video::-webkit-media-controls {
+  display: none;
 }
 
 #video_player .progressAreaTime {
@@ -64,7 +68,6 @@ video::cue {
   font-weight: 400;
   z-index: 1;
   display: none;
-
   background: #00000080;
   border-radius: .25rem;
 }
@@ -73,13 +76,11 @@ video::cue {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 50px;
   width: 100%;
   background: rgb(0 0 0 / 29%);
   box-shadow: 0 0 40px 10px rgb(0 0 0 / 25%);
   z-index: 3;
   transform: translateY(180%);
-  transition: 0.3s;
   padding: 0px 10px;
 }
 
@@ -87,32 +88,27 @@ video::cue {
   transform: translateY(0);
 }
 
-#video_player .controls .progress-area {
-  width: 100%;
+.controls .progress-area .progress-bar {
+  -webkit-appearance: none;
+  appearance: none;
   height: 5px;
-  margin: auto;
+  width: 100%;
   background: #f0f0f063;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
-.controls .progress-area .progress-bar {
-  position: relative;
-  width: 0%;
-  background: #ff0000;
-  height: inherit;
-  border-radius: inherit;
-  cursor: pointer;
-}
-
-.controls .progress-area .progress-bar::before {
-  content: "";
-  position: absolute;
+.controls .progress-area .progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  right: -4px;
-  top: 50%;
-  transform: translateY(-50%);
+  border: none;
+  outline: none;
+  opacity: 1;
+  pointer-events: auto;
   background: #ff0000;
 }
 
@@ -122,8 +118,10 @@ video::cue {
   align-items: center;
   flex-wrap: nowrap;
   width: 97%;
-  height: 46px;
+  /* height: 80px; */
   margin: 0 auto;
+  margin-bottom: 8px;
+  margin-top: 4px;
 }
 
 .controls .controls-list .controls-left,
@@ -323,7 +321,6 @@ video::cue {
     align-items: center;
   }
   
-
   .controls .icon {
     font-size: 24px;
   }
