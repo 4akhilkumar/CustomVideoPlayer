@@ -211,6 +211,7 @@ mainVideo.addEventListener("timeupdate", (e) => {
 progress_Bar.addEventListener("input", (e) => {
   let progressBarValue = e.target.value;
   progress_Bar.style.background = `linear-gradient(to right, #ff0000 0%, #ff0000 ${progressBarValue}%, #f0f0f063 ${progressBarValue}%, #f0f0f063 100%)`;
+  mainVideo.currentTime = (mainVideo.duration / 100) * progressBarValue;
 });
 
 // let's update playing video current time on according to the progress bar width
@@ -454,18 +455,19 @@ window.addEventListener('resize', reportWindowSize);
 // mobile touch controls
 video_player.addEventListener("touchstart", () => {
     controls.classList.add("active");
-    setTimeout(() => {
-      controls.classList.remove("active");
-    }, 8000);
   }, { passive: true }
 );
 
 video_player.addEventListener("touchmove", () => {
-    if (video_player.classList.contains("paused")) {
-      controls.classList.remove("active");
-    } else {
-      controls.classList.add("active");
-    }
+  controls.classList.add("active");
+  }, { passive: true }
+);
+
+video_player.addEventListener("touchend", () => {
+  controls.classList.add("active");
+  setTimeout(() => {
+    controls.classList.remove("active");
+  }, 8000);
   }, { passive: true }
 );
 
