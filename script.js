@@ -266,10 +266,7 @@ progressArea.addEventListener("mousemove", (e) => {
 
   let currentHours = Math.floor(currentMin / 60);
   let currentMinutes = Math.floor(currentMin % 60);
-  
-
-  progressAreaTime.style.setProperty("--x", `${x}px`);
-  progressAreaTime.style.display = "block";
+ 
   if (x >= progressWidthval - 80) {
     x = progressWidthval - 80;
   } else if (x <= 75) {
@@ -292,6 +289,7 @@ progressArea.addEventListener("mousemove", (e) => {
   thumbnail.style.display = "block";
   // the backgroud position-x and background position-y of progressAreaTime change according to the progress bar width same as thumbnail
   progressAreaTime.style.setProperty("--x", `${x}px`);
+  progressAreaTime.style.display = "block";
 
   for (var item of thumbnails) {
     //
