@@ -35,7 +35,7 @@ video::cue {
 
 .video-container #video_player .thumbnail{
   position: absolute;
-  bottom: 82px;
+  bottom: 92px;
   left: calc(var(--x) + 11px);
   transform: translateX(-50%);
   width: 162px;
@@ -58,11 +58,11 @@ video::-webkit-media-controls {
   position: absolute;
   left: calc(var(--x) + 11px);
   transform: translateX(-50%);
-  bottom: 50px;
+  bottom: 62px;
   min-width: 60px;
   text-align: center;
   white-space: nowrap;
-  padding: 5px 10px;
+  padding: 4px 6px;
   color: #fff;
   font-size: 14px;
   font-weight: 400;
@@ -95,7 +95,6 @@ video::-webkit-media-controls {
   width: 100%;
   background: #f0f0f063;
   cursor: pointer;
-  outline: none;
   border: none;
 }
 
