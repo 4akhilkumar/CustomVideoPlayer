@@ -137,10 +137,10 @@ var screenX;
 function double_tap(e) {
   let screenWidth = window.innerWidth;
   screenX = e.touches[0].screenX;
-  if (screenX > 0 && screenX < (screenWidth/2)) {
+  if ((screenX > 0) && (screenX < (screenWidth/2))) {
     mainVideo.currentTime -= 5;
   }
-  else if (screenX > (screenWidth/2) && screenX < screenWidth) {
+  else if ((screenX > (screenWidth/2))) {
     mainVideo.currentTime += 5;
   }
 }
