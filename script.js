@@ -146,7 +146,7 @@ function double_tap(e) {
 }
 
 var tapped = false;
-video_player.addEventListener("touchstart", (e) => {
+mainVideo.addEventListener("touchstart", (e) => {
   if(!tapped) {
     tapped = setTimeout(function() {
       // single_tap();
@@ -461,7 +461,7 @@ video_player.addEventListener("touchmove", () => {
   }, { passive: true }
 );
 
-video_player.addEventListener("touchend", () => {
+mainVideo.addEventListener("touchend", () => {
   controls.classList.add("active");
   setTimeout(() => {
     controls.classList.remove("active");
