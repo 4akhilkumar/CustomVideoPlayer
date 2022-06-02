@@ -133,14 +133,13 @@ function single_tap() {
   isVideoPaused ? pauseVideo() : playVideo();
 }
 
-var screenX;
 function double_tap(e) {
-  let screenWidth = window.innerWidth;
-  screenX = e.touches[0].screenX;
-  if ((screenX > 0) && (screenX < (screenWidth/2))) {
+  let screenWidth = video_player.offsetWidth;
+  var touchX = e.touches[0].pageX;
+  if ((touchX > 0) && (touchX < (screenWidth/2))) {
     mainVideo.currentTime -= 5;
   }
-  else if ((screenX > (screenWidth/2))) {
+  else if ((touchX > (screenWidth/2))) {
     mainVideo.currentTime += 5;
   }
 }
@@ -149,7 +148,7 @@ var tapped = false;
 mainVideo.addEventListener("touchstart", (e) => {
   if(!tapped) {
     tapped = setTimeout(function() {
-      // single_tap();
+      single_tap();
       tapped = null
     },300); //wait 300ms
   } else {
