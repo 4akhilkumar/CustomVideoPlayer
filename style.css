@@ -8,6 +8,14 @@
   user-select: none;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
 video::cue {
   opacity: 0;
 }
