@@ -22,7 +22,7 @@ let thumbnail = video_player.querySelector(".thumbnail");
 function playVideo() {
   play_pause.innerHTML = "pause";
   play_pause.title = "pause";
-  video_player.classList.add("paused");
+  video_player.classList.add("playing");
   mainVideo.play();
 }
 
@@ -30,12 +30,12 @@ function playVideo() {
 function pauseVideo() {
   play_pause.innerHTML = "play_arrow";
   play_pause.title = "play";
-  video_player.classList.remove("paused");
+  video_player.classList.remove("playing");
   mainVideo.pause();
 }
 
 play_pause.addEventListener("click", () => {
-  const isVideoPaused = video_player.classList.contains("paused");
+  const isVideoPaused = video_player.classList.contains("playing");
   isVideoPaused ? pauseVideo() : playVideo();
 });
 
@@ -81,7 +81,7 @@ window.addEventListener("keyup", (e) => {
   }
 
   if (e.key === " " || e.key === "k") {
-    const isVideoPaused = video_player.classList.contains("paused");
+    const isVideoPaused = video_player.classList.contains("playing");
     isVideoPaused ? pauseVideo() : playVideo();
   }
 
@@ -123,13 +123,13 @@ function isMobile() {
 
 if(isMobile() === false) {
   mainVideo.addEventListener("click", () => {
-    const isVideoPaused = video_player.classList.contains("paused");
+    const isVideoPaused = video_player.classList.contains("playing");
     isVideoPaused ? pauseVideo() : playVideo();
   });
 }
 
 function single_tap() {
-  const isVideoPaused = video_player.classList.contains("paused");
+  const isVideoPaused = video_player.classList.contains("playing");
   isVideoPaused ? pauseVideo() : playVideo();
 }
 
@@ -401,16 +401,42 @@ video_player.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 });
 
+let inactivityTime = function() {
+  let time;
+  window.onload = resetTimer;
+  video_player.onmouseenter = resetTimer;
+  video_player.onmousemove = resetTimer;
+  function hideControls() {
+    if (video_player.classList.contains("playing")) {
+      if (settingsBtn.classList.contains("active")) {
+        controls.classList.add("active");
+      } else {
+        controls.classList.remove("active");
+      }
+    } else {
+      controls.classList.add("active");
+    }
+  }
+  function resetTimer() {
+    clearTimeout(time);
+    time = setTimeout(hideControls, 4000)
+  }
+};
+
 // Mouse move controls
 video_player.addEventListener("mouseenter", () => {
+  inactivityTime();
+  controls.classList.add("active");
+});
+
+video_player.addEventListener("mousemove", () => {
   controls.classList.add("active");
 });
 
 video_player.addEventListener("mouseleave", () => {
-  if (video_player.classList.contains("paused")) {
-    if (
-      settingsBtn.classList.contains("active")
-    ) {
+  inactivityTime();
+  if (video_player.classList.contains("playing")) {
+    if (settingsBtn.classList.contains("active")) {
       controls.classList.add("active");
     } else {
       controls.classList.remove("active");
@@ -420,7 +446,7 @@ video_player.addEventListener("mouseleave", () => {
   }
 });
 
-if (video_player.classList.contains("paused")) {
+if (video_player.classList.contains("playing")) {
   if (
     settingsBtn.classList.contains("active")
   ) {
