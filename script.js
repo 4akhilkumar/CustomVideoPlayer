@@ -18,6 +18,8 @@ const video_player = document.querySelector("#video_player"),
 
 let thumbnail = video_player.querySelector(".thumbnail");
 
+var style_cwst = document.querySelector('[data-css-webkit-slider-thumb="cwst"]');
+
 // Play video function
 function playVideo() {
   play_pause.innerHTML = "pause";
@@ -255,7 +257,8 @@ volume.addEventListener("click", () => {
 
 // Update progress area time and display block on mouse move
 progressArea.addEventListener("mousemove", (e) => {
-  let progressWidthval = progressArea.clientWidth + 2;
+  style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
+  let progressWidthval = progressArea.clientWidth - 2;
   let x = e.offsetX;
   let videoDuration = mainVideo.duration;
   let progressTime = Math.floor((x / progressWidthval) * videoDuration);
@@ -308,6 +311,7 @@ progressArea.addEventListener("mousemove", (e) => {
 progressArea.addEventListener("mouseleave", () => {
   thumbnail.style.display = "none";
   progressAreaTime.style.display = "none";
+  style_cwst.innerHTML = "";
 });
 
 // Picture in picture
