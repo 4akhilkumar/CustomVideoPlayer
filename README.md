@@ -19,3 +19,8 @@
 | `Single tap` | Play/Pause the video. |
 | `Double tap - left` | backward 5 seconds. |
 | `Double tap - right` | forward 5 seconds. |
+
+## Acknowledgement
+Original Author & Source - Saif Ur Rehman & https://www.youtube.com/watch?v=BSTBsV19OSM
+
+To Saif Ur Rehman's Code. I made some changes and added features like shortcuts and fixed compatibility issues and responsive for platform Windows and Andriod
