@@ -359,6 +359,17 @@ fullscreen.addEventListener("click", () => {
   setScreenFullExit();
 });
 
+document.addEventListener('fullscreenchange', (e) => {
+  // check whether the screen is in full screen mode or not
+  if (document.fullscreenElement) {
+    video_player.classList.add("openFullScreen");
+    fullscreen.innerHTML = "fullscreen_exit";
+  } else {
+    video_player.classList.remove("openFullScreen");
+    fullscreen.innerHTML = "fullscreen";
+  }
+});
+
 // Open settings
 settingsBtn.addEventListener("click", () => {
   settings.classList.toggle("active");
