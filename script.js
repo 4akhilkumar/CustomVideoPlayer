@@ -308,6 +308,10 @@ progressArea.addEventListener("mousemove", (e) => {
   }
 });
 
+if(isMobile() == true) {
+  style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
+}
+
 progressArea.addEventListener("mouseleave", () => {
   thumbnail.style.display = "none";
   progressAreaTime.style.display = "none";
