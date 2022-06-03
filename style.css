@@ -109,8 +109,17 @@ video::-webkit-media-controls {
 .controls .progress-area .progress-bar::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  opacity: 1;
+  pointer-events: auto;
+  background: #ff0000;
+}
+
+.controls .progress-area .progress-bar::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
   border-radius: 50%;
   border: none;
   outline: none;
@@ -199,12 +208,32 @@ video::-webkit-media-controls {
   transition: 0.3s;
 }
 
+.controls .icon .volume_range::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #fff;
+  opacity: 0;
+  transition: 0.3s;
+}
+
 .controls .icon:hover .volume_range {
   display: inline-block;
   width: 60px;
 }
 
 .controls .icon:hover .volume_range::-webkit-slider-thumb {
+  opacity: 1;
+  pointer-events: auto;
+  transition: 0.5s;
+}
+
+.controls .icon:hover .volume_range::-moz-range-thumb {
   opacity: 1;
   pointer-events: auto;
   transition: 0.5s;
