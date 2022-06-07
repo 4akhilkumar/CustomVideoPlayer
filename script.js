@@ -15,6 +15,7 @@ const video_player = document.querySelector("#video_player"),
   fullscreen = video_player.querySelector(".fullscreen"),
   settings = video_player.querySelector("#settings"),
   playback = video_player.querySelectorAll(".playback li");
+  videoSpinner = video_player.querySelectorAll(".videoSpinner");
 
 let thumbnail = video_player.querySelector(".thumbnail");
 
@@ -221,6 +222,37 @@ progressArea.addEventListener("click", (e) => {
   let progressWidthval = progressArea.clientWidth + 2;
   let ClickOffsetX = e.offsetX;
   mainVideo.currentTime = (ClickOffsetX / progressWidthval) * videoDuration;
+
+  let currentVideoTime = mainVideo.currentTime;
+  let currentMin = Math.floor(currentVideoTime / 60);
+  let currentSec = Math.floor(currentVideoTime % 60);
+
+  let currentHour = Math.floor(currentMin / 60);
+  let currentMinute = Math.floor(currentMin % 60);
+
+  // if seconds are less then 10 then add 0 at the begning
+  currentSec < 10 ? (currentSec = "0" + currentSec) : currentSec;
+  currentMinute < 10 ? (currentMinute = "0" + currentMinute) : currentMinute;
+  currentHour < 10 ? (currentHour = "0" + currentHour) : currentHour;
+
+  if (currentMin > 60) {
+    current.innerHTML = `${currentHour}:${currentMinute}:${currentSec}`;
+  }
+  else {
+    current.innerHTML = `${currentMin}:${currentSec}`;
+  }
+
+  let progressWidth = (mainVideo.currentTime / videoDuration) * 100;
+  progress_Bar.value = progressWidth;
+  progress_Bar.style.background = `linear-gradient(to right, #ff0000 0%, #ff0000 ${progress_Bar.value}%, #f0f0f063 ${progress_Bar.value}%, #f0f0f063 100%)`;
+});
+
+mainVideo.addEventListener("waiting", () => {
+  videoSpinner[0].style.display = "block";
+});
+
+mainVideo.addEventListener("canplay", () => {
+  videoSpinner[0].style.display = "none";
 });
 
 // change volume
