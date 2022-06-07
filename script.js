@@ -19,7 +19,7 @@ const video_player = document.querySelector("#video_player"),
 
 let thumbnail = video_player.querySelector(".thumbnail");
 
-var style_cwst = document.querySelector('[data-css-webkit-slider-thumb="cwst"]');
+// var style_cwst = document.querySelector('[data-css-webkit-slider-thumb="cwst"]');
 
 // Play video function
 function playVideo() {
@@ -289,7 +289,7 @@ volume.addEventListener("click", () => {
 
 // Update progress area time and display block on mouse move
 progressArea.addEventListener("mousemove", (e) => {
-  style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
+  // style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
   let progressWidthval = progressArea.clientWidth - 2;
   let x = e.offsetX;
   let videoDuration = mainVideo.duration;
@@ -341,13 +341,13 @@ progressArea.addEventListener("mousemove", (e) => {
 });
 
 if(isMobile() == true) {
-  style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
+  // style_cwst.innerHTML = ".controls .progress-area .progress-bar::-webkit-slider-thumb { width: 14px !important; height: 14px !important; }";
 }
 
 progressArea.addEventListener("mouseleave", () => {
   thumbnail.style.display = "none";
   progressAreaTime.style.display = "none";
-  style_cwst.innerHTML = "";
+  // style_cwst.innerHTML = "";
 });
 
 // Picture in picture

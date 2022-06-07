@@ -135,6 +135,8 @@ video::-webkit-media-controls {
   -webkit-appearance: none;
   appearance: none;
   border-radius: 50%;
+  width: 14px;
+  height: 14px;
   border: none;
   outline: none;
   opacity: 1;
