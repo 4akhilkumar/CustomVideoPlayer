@@ -151,7 +151,7 @@ var tapped = false;
 mainVideo.addEventListener("touchstart", (e) => {
   if(!tapped) {
     tapped = setTimeout(function() {
-      single_tap();
+      // single_tap();
       tapped = null
     },300); //wait 300ms
   } else {
