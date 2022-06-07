@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -14,10 +15,6 @@ body {
   align-items: center;
   align-content: center;
   justify-content: center;
-}
-
-video::cue {
-  opacity: 0;
 }
 
 .material-icons {
