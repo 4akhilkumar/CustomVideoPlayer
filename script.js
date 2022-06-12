@@ -19,6 +19,10 @@ const video_player = document.querySelector("#video_player"),
 
 let thumbnail = video_player.querySelector(".thumbnail");
 
+var videoSource = document.getElementById('id_videoSource');
+videoSource.setAttribute("src", "http://127.0.0.1:5500/BigBuckBunny.mp4");
+mainVideo.load();
+
 // var style_cwst = document.querySelector('[data-css-webkit-slider-thumb="cwst"]');
 
 // Play video function
